@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+
+        }
+
+        .main-container {
+            /* display: flex;
+            justify-content: center; */
+        }
+        h1{
+            margin:40px;
+        }
+      
+        .main {
+            margin-top: 150px;
+        }
+
+        .container {
+            display: inline-block;
+            width: 35px;
+            height: 50px;
+            font-size: 30px;
+        }
+
+        .btn-container button {
+            width: 100px;
+            height: 50px;
+            font-size: 22px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Stop Watch Application</h1>
+    <div class="main">
+        <div class="main-container">
+            <h1 id="min" class="container">0</h1>
+            <h1 id="sec" class="container">0</h1>
+            <h1 id="msec" class="container">0</h1>
+        </div>
+
+        <div class="btn-container">
+            <button onclick="start(this)" id="btn">start</button>
+            <button onclick="pause()">pause</button>
+            <button onclick="reset()">Reset</button>
+        </div>
+    </div>
+    <script>
+        // --------------------------------------- A simple way to create and stop timer-----------------------------//
+
+        // var count = 0;
+        // var interval;
+
+        // function timer() {
+        //     count++;
+        //     console.log(count)
+        // }
+
+        // interval = setInterval(timer, 1000)
+
+        // setTimeout(function () {
+        //     clearInterval(interval)
+        // }, 10000)
+
+        // --------------------start---------------------//
+
+        var min = 0;
+        var sec = 0;
+        var msec = 0;
+        var disable;
+        var minget = document.getElementById("min");
+        var secget = document.getElementById("sec");
+        var msecget = document.getElementById("msec");
+
+        function timer() {
+            msec++
+            msecget.innerHTML = msec;
+            if (msec >= 100) {
+                sec++
+                secget.innerHTML = sec
+                msec = 0
+            }
+            else if (sec >= 60) {
+                min++
+                minget.innerHTML = min
+                sec = 0
+            }
+        }
+
+
+        function start(n) {
+
+            interval = setInterval(timer, 10)
+            n.disabled = true;
+        }
+
+        function pause() {
+            clearInterval(interval)
+            document.getElementById("btn").disabled = false
+        }
+
+        function reset() {
+            min = 0
+            sec = 0
+            msec = 0
+            minget.innerHTML = min
+            secget.innerHTML = sec
+            msecget.innerHTML = msec
+            clearInterval(interval) 
+            document.getElementById("btn").disabled = false
+        }
+
+    </script>
+</body>
+
+</html>
